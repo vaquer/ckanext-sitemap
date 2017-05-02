@@ -43,7 +43,7 @@ class SitemapController(BaseController):
             url = etree.SubElement(root, 'url')
             loc = etree.SubElement(url, 'loc')
             pkg_url = url_for(controller='package', action="read", id=pkg.name)
-            loc.text = config.get('ckan.site_url') + pkg_url
+            loc.text = config.get('ckan.site_url') + pkg_url.replace('busca/', '')
             lastmod = etree.SubElement(url, 'lastmod')
             lastmod.text = pkg.latest_related_revision.timestamp.strftime('%Y-%m-%d')
             self._create_language_alternatives(pkg_url, url)
